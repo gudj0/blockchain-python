@@ -1,10 +1,11 @@
-from blockchain import Block, Blockchain 
+from block import Block
+from blockchain import Blockchain
 import uuid 
 
 BLOCK_SIZE = 25 
 
-# tests the functionality of the Blockchain.validate_block() function
-def test_validate_block(bc, alice, bob):
+# tests the functionality of the Blockchain.add_block() and validate_block() function
+def test_add_block(bc, alice, bob):
      
     # should not allow a lower or equal block number to the last block
     b = Block(BLOCK_SIZE)
@@ -18,9 +19,9 @@ def test_validate_block(bc, alice, bob):
     # block without a valid previous block should not be added
     b = Block(BLOCK_SIZE)
     b.num = bc.current_block + 2
-    alice_init = bc.get_balance(alice)
+    bob_init = bc.get_balance(bob)
     new_address = uuid.uuid4().hex
-    b.tx(new_address, alice) 
+    b.tx(new_address, bob) 
     res = bc.add_block(b)
     assert res == False, "Block with a >1 higher block number should not be added"
 
@@ -82,5 +83,5 @@ if __name__=="__main__":
     
     # test functions
     test_update_state(bc, bob, alice) 
-    test_validate_block(bc, bob, alice) 
+    test_add_block(bc, bob, alice) 
 

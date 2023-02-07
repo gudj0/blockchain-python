@@ -1,4 +1,5 @@
-from blockchain import Block, Blockchain
+from blockchain import Blockchain
+from block import Block 
 import uuid 
 
 BLOCK_SIZE = 25 
