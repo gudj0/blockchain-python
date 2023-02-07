@@ -20,8 +20,8 @@ class Blockchain():
     def add_block(self, b):
         if not self.validate_block(b):
             return False 
-        self.update_state(b)
         self.chain.append(b)
+        self.update_state(b)
         self.current_block = b.num
         return True
         
@@ -51,7 +51,7 @@ class Blockchain():
         for tx in b.transactions: 
             if self.state[tx.sender] == 0: 
                 print("[transaction #%s]: failed due to low balance"%(tx.id))
-                return
+                continue
             self.state[tx.sender] -= 1    
             self.state[tx.receiver] += 1 
             print("[transaction #%s]: success [%s -> %s]"%(tx.id, tx.sender, tx.receiver))
