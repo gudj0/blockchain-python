@@ -1,5 +1,6 @@
 from blockchain import Block, Blockchain
 import uuid 
+
 BLOCK_SIZE = 25 
 
 if __name__=="__main__":
@@ -11,14 +12,15 @@ if __name__=="__main__":
     # init addresses 
     bob = uuid.uuid4().hex
     alice = uuid.uuid4().hex 
-    
+    guddy = uuid.uuid4().hex 
+
     # populate addresses with some cash through faucet
     bc.faucet(bob)
     bc.faucet(alice)
 
     # check initial balances
-    print(bc.get_balance(bob))
-    print(bc.get_balance(alice))
+    print("Bob's balance: ", bc.get_balance(bob))
+    print("Alice's balance: ", bc.get_balance(alice))
 
     # do some transactions
     g.tx(bob, alice)
@@ -26,18 +28,25 @@ if __name__=="__main__":
     g.tx(bob, alice)
     g.tx(bob, alice)
     g.tx(alice, bob)
-    g.tx(alice, bob)
-    g.tx(alice, bob)
-    g.tx(alice, bob)
-    g.tx(alice, bob)
     
     # add the genesis block 
     bc.add_block(g) 
 
-    # check updated state (balances)
-    print(bc.get_balance(bob))
-    print(bc.get_balance(alice))
+    # add 100 empty blocks 
+    for i in range(100):
+        bc.add_block(Block(BLOCK_SIZE))
 
-    # fetch the genesis block from chain
-    genesis_block = bc.get_block(1)
-    print(genesis_block)
+    # add some populated blocks 
+    for i in range(50):
+        new = Block(BLOCK_SIZE)
+        new.tx(bob, guddy)
+        bc.add_block(new)
+
+    # check updated state (balances)
+    print("Bob's balance: ", bc.get_balance(bob))
+    print("Alice's balance: ", bc.get_balance(alice))
+    print("Guddy's balance: ", bc.get_balance(guddy))
+
+    # fetch some blocks from chain
+    genesis = bc.get_block(1)
+    hundreth = bc.get_block(100)
