@@ -6,9 +6,6 @@ The implementation consists of three files:
 
 * `blockchain.py`. 
 * `block.py`
-
-and a main program:
-
 * `main.py`
 
 
