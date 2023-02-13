@@ -1,5 +1,5 @@
 ## Blockchain Implementation in Python
-The following contains a Python implementation of the Level 2 blockchain. 
+The following contains a Python implementation of a basic blockchain
 
 #### Implementation 
 The implementation consists of three files:
