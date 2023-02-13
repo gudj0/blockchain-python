@@ -13,7 +13,7 @@ if __name__=="__main__":
     # init addresses 
     bob = uuid.uuid4().hex
     alice = uuid.uuid4().hex 
-    guddy = uuid.uuid4().hex 
+    trudy = uuid.uuid4().hex 
 
     # populate addresses with some cash through faucet
     bc.faucet(bob)
@@ -40,13 +40,13 @@ if __name__=="__main__":
     # add some populated blocks 
     for i in range(50):
         new = Block(BLOCK_SIZE)
-        new.tx(bob, guddy)
+        new.tx(bob, trudy)
         bc.add_block(new)
 
     # check updated state (balances)
     print("Bob's balance: ", bc.get_balance(bob))
     print("Alice's balance: ", bc.get_balance(alice))
-    print("Guddy's balance: ", bc.get_balance(guddy))
+    print("Trudy's balance: ", bc.get_balance(trudy))
 
     # fetch some blocks from chain
     genesis = bc.get_block(1)

@@ -18,8 +18,6 @@ def test_tx(bc, bob, alice):
     alice_init = bc.get_balance(alice)
     b.tx(bob, alice) 
     bc.add_block(b)
-    print(bob_init, alice_init)
-    print(bc.get_balance(bob), bc.get_balance(alice))
     assert bc.get_balance(bob) == bob_init-1, "Senders balance should decrease"
     assert bc.get_balance(alice) == alice_init+1, "Receivers balance should increase"
 
